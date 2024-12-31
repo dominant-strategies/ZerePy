@@ -75,8 +75,8 @@ class EternalAIConnection(BaseConnection):
     def _get_client(self) -> OpenAI:
         """Get or create EternalAI client"""
         if not self._client:
-            api_key = os.getenv("EternalAI_API_KEY")
-            api_url = os.getenv("EternalAI_API_URL")
+            api_key = os.getenv("ETERNALAI_API_KEY")
+            api_url = os.getenv("ETERNALAI_API_URL")
             if not api_key:
                 raise EternalAIConfigurationError("EternalAI API key not found in environment")
             self._client = OpenAI(api_key=api_key, base_url=api_url)
@@ -105,8 +105,8 @@ class EternalAIConnection(BaseConnection):
                 with open('.env', 'w') as f:
                     f.write('')
 
-            set_key('.env', 'EternalAI_API_KEY', api_key)
-            set_key('.env', 'EternalAI_API_URL', api_url)
+            set_key('.env', 'ETERNALAI_API_KEY', api_key)
+            set_key('.env', 'ETERNALAI_API_URL', api_url)
 
             # Validate the API key by trying to list models
             client = OpenAI(api_key=api_key, base_url=api_url)
@@ -124,8 +124,8 @@ class EternalAIConnection(BaseConnection):
         """Check if EternalAI API key is configured and valid"""
         try:
             load_dotenv()
-            api_key = os.getenv('EternalAI_API_KEY')
-            api_url = os.getenv('EternalAI_API_URL')
+            api_key = os.getenv('ETERNALAI_API_KEY')
+            api_url = os.getenv('ETERNALAI_API_URL')
             if not api_key or not api_url:
                 return False
 
